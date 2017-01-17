@@ -8,7 +8,7 @@
 // Package bytetest is an efficient byte test implementation for Golang.
 package bytetest
 
-// Memset sets each byte in data to value.
+// Test returns true iff each byte in data is equal to value.
 func Test(data []byte, value byte) bool {
 	if len(data) == 0 {
 		return true
