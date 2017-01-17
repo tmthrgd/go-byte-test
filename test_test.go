@@ -14,12 +14,12 @@ import (
 	"github.com/tmthrgd/go-memset"
 )
 
-func testCorrect(t *testing.T, size func(rand *rand.Rand) int, scale float64) {
+func TestCorrect(t *testing.T) {
 	if err := quick.Check(Test, &quick.Config{
 		Values: func(args []reflect.Value, rand *rand.Rand) {
 			off := rand.Intn(32)
 
-			data := make([]byte, off+size(rand))
+			data := make([]byte, off+1+rand.Intn(128*1024))
 
 			value := byte(rand.Intn(0x100))
 			memset.Memset(data, value)
@@ -28,7 +28,7 @@ func testCorrect(t *testing.T, size func(rand *rand.Rand) int, scale float64) {
 			args[1] = reflect.ValueOf(value)
 		},
 
-		MaxCountScale: scale,
+		MaxCountScale: 100,
 	}); err != nil {
 		t.Error(err)
 	}
@@ -39,7 +39,7 @@ func testCorrect(t *testing.T, size func(rand *rand.Rand) int, scale float64) {
 		Values: func(args []reflect.Value, rand *rand.Rand) {
 			off := rand.Intn(32)
 
-			data := make([]byte, off+size(rand))
+			data := make([]byte, off+1+rand.Intn(128*1024))
 
 			value := byte(rand.Intn(0x100))
 			memset.Memset(data, value)
@@ -50,26 +50,10 @@ func testCorrect(t *testing.T, size func(rand *rand.Rand) int, scale float64) {
 			args[1] = reflect.ValueOf(value)
 		},
 
-		MaxCountScale: scale,
+		MaxCountScale: 100,
 	}); err != nil {
 		t.Error(err)
 	}
-}
-
-func TestCorrect(t *testing.T) {
-	testCorrect(t, func(rand *rand.Rand) int {
-		return 1 + rand.Intn(128*1024)
-	}, 20)
-}
-
-func TestCorrectHuge(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping test in short mode.")
-	}
-
-	testCorrect(t, func(rand *rand.Rand) int {
-		return 32*1024*1024 + rand.Intn(96*1024*1024)
-	}, 0.025)
 }
 
 var sizes = []struct {
