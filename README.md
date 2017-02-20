@@ -28,15 +28,15 @@ go get github.com/tmthrgd/go-byte-test
 ## Benchmark
 
 ```
-BenchmarkTest/32-8  	200000000	         6.35 ns/op	5040.66 MB/s
-BenchmarkTest/128-8 	100000000	        12.4 ns/op	10295.25 MB/s
-BenchmarkTest/1K-8  	20000000	        68.0 ns/op	15066.47 MB/s
-BenchmarkTest/16K-8 	 2000000	       826 ns/op	19815.88 MB/s
-BenchmarkTest/128K-8         	  200000	      6577 ns/op	19926.39 MB/s
-BenchmarkTest/1M-8           	   30000	     58091 ns/op	18050.46 MB/s
-BenchmarkTest/16M-8          	    1000	   1418267 ns/op	11829.37 MB/s
-BenchmarkTest/128M-8         	     100	  10938682 ns/op	12270.01 MB/s
-BenchmarkTest/512M-8         	      30	  43501966 ns/op	12341.30 MB/s
+BenchmarkTest/32-8         	200000000	         6.60 ns/op	4845.48 MB/s
+BenchmarkTest/128-8        	200000000	         8.39 ns/op	15256.81 MB/s
+BenchmarkTest/1K-8         	50000000	        29.9 ns/op	34288.78 MB/s
+BenchmarkTest/16K-8        	 5000000	       361 ns/op	45345.02 MB/s
+BenchmarkTest/128K-8       	  500000	      3483 ns/op	37631.76 MB/s
+BenchmarkTest/1M-8         	   30000	     41177 ns/op	25464.56 MB/s
+BenchmarkTest/16M-8        	    2000	   1066258 ns/op	15734.66 MB/s
+BenchmarkTest/128M-8       	     200	   8561493 ns/op	15676.91 MB/s
+BenchmarkTest/512M-8       	      50	  34319085 ns/op	15643.51 MB/s
 ```
 
 ```
@@ -54,26 +54,26 @@ BenchmarkGoTest/512M-8       	       3	 457974138 ns/op	1172.27 MB/s
 go -> go-byte-test:
 ```
 benchmark                old ns/op     new ns/op     delta
-BenchmarkTest/32-8       35.8          6.35          -82.26%
-BenchmarkTest/128-8      120           12.4          -89.67%
-BenchmarkTest/1K-8       869           68.0          -92.17%
-BenchmarkTest/16K-8      13760         826           -94.00%
-BenchmarkTest/128K-8     109813        6577          -94.01%
-BenchmarkTest/1M-8       878439        58091         -93.39%
-BenchmarkTest/16M-8      14339512      1418267       -90.11%
-BenchmarkTest/128M-8     114336485     10938682      -90.43%
-BenchmarkTest/512M-8     457974138     43501966      -90.50%
+BenchmarkTest/32-8       35.8          6.60          -81.56%
+BenchmarkTest/128-8      120           8.39          -93.01%
+BenchmarkTest/1K-8       869           29.9          -96.56%
+BenchmarkTest/16K-8      13760         361           -97.38%
+BenchmarkTest/128K-8     109813        3483          -96.83%
+BenchmarkTest/1M-8       878439        41177         -95.31%
+BenchmarkTest/16M-8      14339512      1066258       -92.56%
+BenchmarkTest/128M-8     114336485     8561493       -92.51%
+BenchmarkTest/512M-8     457974138     34319085      -92.51%
 
 benchmark                old MB/s     new MB/s     speedup
-BenchmarkTest/32-8       893.80       5040.66      5.64x
-BenchmarkTest/128-8      1058.03      10295.25     9.73x
-BenchmarkTest/1K-8       1177.11      15066.47     12.80x
-BenchmarkTest/16K-8      1190.62      19815.88     16.64x
-BenchmarkTest/128K-8     1193.59      19926.39     16.69x
-BenchmarkTest/1M-8       1193.68      18050.46     15.12x
-BenchmarkTest/16M-8      1170.00      11829.37     10.11x
-BenchmarkTest/128M-8     1173.88      12270.01     10.45x
-BenchmarkTest/512M-8     1172.27      12341.30     10.53x
+BenchmarkTest/32-8       893.80       4845.48      5.42x
+BenchmarkTest/128-8      1058.03      15256.81     14.42x
+BenchmarkTest/1K-8       1177.11      34288.78     29.13x
+BenchmarkTest/16K-8      1190.62      45320.13     38.06x
+BenchmarkTest/128K-8     1193.59      37631.76     31.53x
+BenchmarkTest/1M-8       1193.68      25464.56     21.33x
+BenchmarkTest/16M-8      1170.00      15734.66     13.45x
+BenchmarkTest/128M-8     1173.88      15676.91     13.35x
+BenchmarkTest/512M-8     1172.27      15643.51     13.34x
 ```
 
 ## License

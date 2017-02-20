@@ -30,6 +30,7 @@ func testAsm(a *asm.Asm) {
 
 	a.Start()
 
+	hugeloop := a.NewLabel("hugeloop")
 	bigloop := a.NewLabel("bigloop")
 	loop := a.NewLabel("loop")
 	retLabel := a.NewLabel("ret")
@@ -48,6 +49,37 @@ func testAsm(a *asm.Asm) {
 	a.Pinsrb(asm.X0, ax, asm.Constant(0))
 	a.Pxor(asm.X1, asm.X1)
 	a.Pshufb(asm.X0, asm.X1)
+
+	a.Cmpq(asm.Constant(64), cx)
+	a.Jb(bigloop)
+
+	a.Label(hugeloop)
+
+	a.Movou(asm.X1, asm.Address(si, cx, asm.SX1, -16))
+	a.Movou(asm.X2, asm.Address(si, cx, asm.SX1, -32))
+	a.Movou(asm.X3, asm.Address(si, cx, asm.SX1, -48))
+	a.Movou(asm.X4, asm.Address(si, cx, asm.SX1, -64))
+
+	a.Pxor(asm.X1, asm.X0)
+	a.Pxor(asm.X2, asm.X0)
+	a.Pxor(asm.X3, asm.X0)
+	a.Pxor(asm.X4, asm.X0)
+
+	a.Por(asm.X1, asm.X2)
+	a.Por(asm.X1, asm.X3)
+	a.Por(asm.X1, asm.X4)
+
+	a.Ptest(asm.X1, asm.X1)
+	a.Jnz(retFalse)
+
+	a.Subq(cx, asm.Constant(64))
+	a.Jz(retTrue)
+
+	a.Cmpq(asm.Constant(64), cx)
+	a.Jae(hugeloop)
+
+	a.Cmpq(asm.Constant(16), cx)
+	a.Jb(loop)
 
 	a.Label(bigloop)
 

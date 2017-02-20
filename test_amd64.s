@@ -18,6 +18,29 @@ TEXT ·testAsm(SB),NOSPLIT,$0
 	PINSRB $0, AX, X0
 	PXOR X1, X1
 	PSHUFB X1, X0
+	CMPQ BX, $64
+	JB bigloop
+hugeloop:
+	MOVOU -16(SI)(BX*1), X1
+	MOVOU -32(SI)(BX*1), X2
+	MOVOU -48(SI)(BX*1), X3
+	MOVOU -64(SI)(BX*1), X4
+	PXOR X0, X1
+	PXOR X0, X2
+	PXOR X0, X3
+	PXOR X0, X4
+	POR X2, X1
+	POR X3, X1
+	POR X4, X1
+	// PTEST X1, X1
+	BYTE $0x66; BYTE $0x0f; BYTE $0x38; BYTE $0x17; BYTE $0xc9
+	JNZ ret_false
+	SUBQ $64, BX
+	JZ ret_true
+	CMPQ BX, $64
+	JAE hugeloop
+	CMPQ BX, $16
+	JB loop
 bigloop:
 	MOVOU -16(SI)(BX*1), X1
 	PXOR X0, X1
