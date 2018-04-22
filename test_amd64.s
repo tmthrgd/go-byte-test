@@ -46,8 +46,7 @@ massiveloop:
 	POR X6, X1
 	POR X7, X1
 	POR X8, X1
-	// PTEST X1, X1
-	BYTE $0x66; BYTE $0x0f; BYTE $0x38; BYTE $0x17; BYTE $0xc9
+	PTEST X1, X1
 	JNZ ret_false
 	SUBQ $128, BX
 	JZ ret_true
@@ -69,8 +68,7 @@ hugeloop:
 	POR X2, X1
 	POR X3, X1
 	POR X4, X1
-	// PTEST X1, X1
-	BYTE $0x66; BYTE $0x0f; BYTE $0x38; BYTE $0x17; BYTE $0xc9
+	PTEST X1, X1
 	JNZ ret_false
 	SUBQ $64, BX
 	JZ ret_true
@@ -81,8 +79,7 @@ hugeloop:
 bigloop:
 	MOVOU -16(SI)(BX*1), X1
 	PXOR X0, X1
-	// PTEST X1, X1
-	BYTE $0x66; BYTE $0x0f; BYTE $0x38; BYTE $0x17; BYTE $0xc9
+	PTEST X1, X1
 	JNZ ret_false
 	SUBQ $16, BX
 	JZ ret_true
