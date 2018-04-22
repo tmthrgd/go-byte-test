@@ -17,8 +17,6 @@ func Test(data []byte, value byte) bool {
 	return testAsm(&data[0], uint64(len(data)), value)
 }
 
-//go:generate go run asm_gen.go
-
 // This function is implemented in test_amd64.s
 //go:noescape
 func testAsm(src *byte, len uint64, value byte) (ret bool)
